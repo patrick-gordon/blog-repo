@@ -1,9 +1,9 @@
 const express = require('express');
 const helmet = require('helmet');
 
-const UserRouter = require('./endpoints/users/user-router.js.js');
-const PostRouter = require('./endpoints/posts/post-router.js.js');
-const LoginRouter = require('./endpoints/login/login-router.js.js');
+const UserRouter = require('./endpoints/users/user-router.js');
+const PostRouter = require('./endpoints/posts/post-router.js');
+const LoginRouter = require('./endpoints/login/login-router.js');
 const RegisterRouter = require('./endpoints/register/register-router.js');
 
 

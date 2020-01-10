@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../users/user-model');
 
+const router = express.Router();
 
 //Create User
 router.post('/', (req, res) => {
@@ -14,3 +15,5 @@ router.post('/', (req, res) => {
       res.status(500).json({ message: 'Failed to create new user' });
     });
 });
+
+module.exports = router
