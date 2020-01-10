@@ -6,9 +6,13 @@ exports.up = function(knex) {
       tbl.text('username', 128)
         .unique()
         .notNullable();
+      tbl.string('password', 20)
+        .notNullable()
     })
     .createTable('posts', tbl => {
       tbl.increments();
+      tbl.string('title')
+        .notNullable()
       tbl.text('contents');
       tbl.integer('user_id')
         .unsigned()

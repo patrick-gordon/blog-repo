@@ -1,9 +1,5 @@
 const express = require('express');
-
-const User = require('./user-model.js');
-
-const db = require('../data/db-config.js');
-
+const User = require('./user-model.js.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -19,10 +15,8 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
- User.findById()
-  .then(users => {
-    const user = users[0];
-
+ User.findById(id)
+  .then(user => {
     if (user) {
       res.json(user);
     } else {
@@ -37,9 +31,9 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const userData = req.body;
 
-  User.add()
-  .then(ids => {
-    res.status(201).json({ created: ids[0] });
+  User.add(userData)
+  .then(newUser => {
+    res.status(201).json(newUser);
   })
   .catch(err => {
     res.status(500).json({ message: 'Failed to create new user' });
@@ -50,10 +44,10 @@ router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
-  User.update()
-  .then(count => {
-    if (count) {
-      res.json({ update: count });
+  User.update(changes, id)
+  .then(user => {
+    if (user) {
+      res.json({ updated: user });
     } else {
       res.status(404).json({ message: 'Could not find user with given id' });
     }
@@ -66,7 +60,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
- User.remove()
+ User.remove(id)
   .then(count => {
     if (count) {
       res.json({ removed: count });
@@ -83,9 +77,7 @@ router.delete('/:id', (req, res) => {
 router.get('/:id/posts', (req, res) => {
   const { id } = req.params
 
-  // SELECT id, contents, username FROM posts
-  // JOIN users as u ON p.user = u.id;
-  User.findPost(id)
+  User.findPosts(id)
   .then(posts => {
       res.status(200).json(posts)
   })

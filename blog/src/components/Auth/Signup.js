@@ -16,7 +16,6 @@ import { register } from '../../actions/authActions';
 class Signup extends Component {
     state = {
         username: '',
-        email: '',
         password: '',
         msg: null
     }
@@ -46,12 +45,11 @@ class Signup extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        const { username, email, password } = this.state;
+        const { username, password } = this.state;
 
         //new user object
         const newUser = {
             username,
-            email, 
             password
         };
 
@@ -84,15 +82,6 @@ class Signup extends Component {
                             name='password'
                             id='password'
                             placeholder="Password"
-                            onChange={this.onChange}
-                            />
-                        <Label for='email'>Email</Label>
-                        <Input
-                            className='mb-3'
-                            type='email'
-                            name='email'
-                            id='email'
-                            placeholder="Email"
                             onChange={this.onChange}
                             />
                         <Button color='dark' style={{ width: '10rem'}} block className='mt-3'>
