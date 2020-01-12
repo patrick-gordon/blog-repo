@@ -1,4 +1,4 @@
-import { GET_USER } from '../actions/types'
+import { GET_USERS } from '../actions/types'
 
 const initialState = {
     user: {},
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch(action.type){
-        case GET_USER:
+        case GET_USERS:
         return{
             ...state,
             user: action.payload,

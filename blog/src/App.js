@@ -6,6 +6,7 @@ import Post from './components/Post'
 import { loadUser } from './actions/authActions'
 import store from './store';
 import Signup from './components/Auth/Signup'
+import Profile from './components/Profile';
 
 
 import AppNav from './components/AppNav';
@@ -24,7 +25,7 @@ class App extends Component {
         {/* <Route path='/login' component={Login} /> */}
         <Route path='/signup' component={Signup} /> 
         <Route path='/posts' component={Post} />
-        {/* <Route path='/user' component={Profile} /> */}
+        <Route path='/user' component={Profile} />
       </Switch>
     </div>
   );

@@ -133,7 +133,7 @@ import PropTypes from 'prop-types'
     }
 }
 
-Post.propTypers = {
+Post.propTypes = {
     getPosts: PropTypes.func.isRequired,
     post: PropTypes.object.isRequired
 }

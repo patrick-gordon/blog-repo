@@ -1,4 +1,4 @@
-import { GET_USER } from './types';
+import { GET_USERS } from './types';
 import axios from 'axios';
 import {tokenConfig} from './authActions'
 
@@ -7,12 +7,12 @@ import {tokenConfig} from './authActions'
 
 
 export const getUsers = () => (dispatch, getState) => {
-    dispatch(setPostsLoading());
+    dispatch();
     axios
       .get('/api/users/:username', tokenConfig(getState))
       .then(res =>
            dispatch({
-          type: GET_USER,
+          type: GET_USERS,
           payload: res.data
           }) 
       )
