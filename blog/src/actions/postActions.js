@@ -40,6 +40,7 @@ export const addPost = post  => dispatch => {
     .catch(err => console.log(err))
 };
 
+
 export const setPostsLoading = () => {
     return {
        type: ITEMS_LOADING

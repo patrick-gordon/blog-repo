@@ -1,10 +1,11 @@
 const express = require('express')
 const Post = require('./post-model');
 const User = require('../users/user-model');
+const Protected = require('../auth/restricted-middleware')
 
 const router = express.Router();
 
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
     Post.find()
     .then(posts => {
         res.json(posts);
@@ -15,11 +16,12 @@ router.get('/', (req,res) => {
 });
 
 router.post('/:id', (req, res) => {
+  console.log(req.params);
     const postData = req.body;
-    const username = req.params
+    const id = req.params 
     
 
-    User.findByUsername(username)
+    User.findBy(id);
     Post.add(postData)
     .then(newPost => {
         res.status(201).json(newPost)

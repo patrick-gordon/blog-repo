@@ -12,6 +12,15 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/:username', (req, res ) => {
+  const { username } = req.params;
+
+  User.findBy({username})
+  .then(user  => {
+    res.status(200).json(user)
+  })
+})
+
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 

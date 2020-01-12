@@ -4,10 +4,10 @@ const db = require('../../data/db-config.js');
 module.exports = {
     find,
     findById,
-    findByUsername,
+    findBy,
     findPosts,
     add,
-    update,
+    // update,
     remove
 };
 
@@ -21,8 +21,8 @@ function findById(id){
     return db('users').where({ id }).first();
 }
 
-function findByUsername(username){
-    return db('users').where({ username }).first();
+function findBy(filter){
+    return db('users').where(filter).first();
 }
 
 // SELECT id, contents, username FROM posts
@@ -35,12 +35,12 @@ function findPosts(user_id){
 }
 
 //resolves to newly crerated user
-function add(user){
-    return db('users').insert(user)
-    .then(ids => {
-        return findById(ids[0]);
-    });
-}
+// function add(user){
+//     return db('users').insert(user)
+//     .then(ids => {
+//         return findById(ids[0]);
+//     });
+// }
 
 //resolves to updated user
 function update(changes, id){
@@ -48,6 +48,12 @@ function update(changes, id){
     .then(count => {
         return findById(id);
     });
+}
+
+async function add(user) {
+    const [id] = await db('users').insert(user);
+
+    return findById(id);
 }
 
 //resolves to count

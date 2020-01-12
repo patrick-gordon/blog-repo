@@ -66,6 +66,7 @@ import PropTypes from 'prop-types'
 
     render() {  
         const { posts } = this.props.post;
+        console.log(posts)
         return (
             <div>
                 <Container>
@@ -108,7 +109,7 @@ import PropTypes from 'prop-types'
                     </ModalBody>
                     </Modal>
                     <ListGroup className='posts'>
-                        {posts.map(({ id, title, body}) => (
+                        {posts.map(({ id, title, contents}) => (
                            <ListGroupItem style={{display: 'flex'}}>
                                <Button
                                className='remove-btn'
@@ -118,18 +119,10 @@ import PropTypes from 'prop-types'
                                >
                                  &times;
                                </Button>
-                                {title}
-                               
-                              
-                               <UncontrolledDropdown>
-                                <DropdownToggle caret />
-                               
-                                <DropdownMenu>
-                                    <DropdownItem>
-                                        Post 
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown> 
+                               <div>
+                                <h4>Title: {title}</h4><br></br>
+                                <p>Contents: {contents}</p>
+                                </div>
                            </ListGroupItem>
                         ))}
                     </ListGroup>
