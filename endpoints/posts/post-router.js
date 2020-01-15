@@ -5,7 +5,7 @@ const Protected = require('../auth/restricted-middleware')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', Protected, (req, res) => {
     Post.find()
     .then(posts => {
         res.json(posts);
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/:id', (req, res) => {
+router.post('/:id', Protected, (req, res) => {
   console.log(req.params);
     const postData = req.body;
     const id = req.params 
@@ -33,7 +33,7 @@ router.post('/:id', (req, res) => {
 });
 
 
-router.put('/id', (req, res) => {
+router.put('/id', Protected, (req, res) => {
     const { id } = req.params;
     const changes = req.body;
 
@@ -51,7 +51,7 @@ router.put('/id', (req, res) => {
       });
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', Protected, (req, res) => {
     const { id } = req.params;
   
    Post.remove(id)

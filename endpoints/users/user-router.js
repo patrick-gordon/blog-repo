@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('./user-model.js');
 const router = express.Router();
+const Protected = require('../auth/restricted-middleware')
 
 router.get('/', (req, res) => {
   User.find()
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/:username', (req, res ) => {
+router.get('/:username', Protected, (req, res ) => {
   const { username } = req.params;
 
   User.findBy({username})
@@ -21,7 +22,7 @@ router.get('/:username', (req, res ) => {
   })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', Protected, (req, res) => {
   const { id } = req.params;
 
  User.findById(id)
@@ -37,19 +38,8 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  const userData = req.body;
 
-  User.add(userData)
-  .then(newUser => {
-    res.status(201).json(newUser);
-  })
-  .catch(err => {
-    res.status(500).json({ message: 'Failed to create new user' });
-  });
-});
-
-router.put('/:id', (req, res) => {
+router.put('/:id', Protected, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
@@ -66,7 +56,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', Protected, (req, res) => {
   const { id } = req.params;
 
  User.remove(id)
@@ -83,7 +73,7 @@ router.delete('/:id', (req, res) => {
 });
 
 //all posts by username
-router.get('/:id/posts', (req, res) => {
+router.get('/:id/posts', Protected, (req, res) => {
   const { id } = req.params
 
   User.findPosts(id)

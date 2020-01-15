@@ -3,6 +3,7 @@ const express = require('express');
 const User = require('../users/user-model')
 const bcrypt = require('bcryptjs');
 const Protected = require('./restricted-middleware')
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
@@ -15,8 +16,10 @@ router.post('/login',  (req,res) => {
     .then(user => {
         if(user && bcrypt.compareSync(password, user.password)) {
             // add user info to session
-            req.session.user = user;
-            res.status(200).json({ message: `Welcome ${user.username}!`});
+            const token = generateToken(user);
+            res.status(200).json({ message: `Welcome ${user.username}!`,
+            token
+        });
         } else {
             res.status(401).json({ message: `Invalid Credentials`})
         }
@@ -36,14 +39,33 @@ router.post('/register', (req, res) => {
 
     User.add(user)
     .then(saved => {
-      req.session.user = saved;
-      res.status(201).json(saved);
+     const token = generateToken(saved);
+      res.status(201).json({
+        user: saved,
+        token
+      });
     })
     .catch(err => {
       console.log(err);
       res.status(500).json({ message: 'Failed to create new user' });
     });
   });
+
+  function generateToken(user){
+    //header payload and verify signature
+    // payload => username, ID, roles, experation date
+    const payload = {
+      sub: user.id,
+      username: user.username
+    }
+  
+    const options = {
+      expiresIn: '1d'
+    }
+  
+    return jwt.sign(payload, process.env.JWT_SECRET, options);
+  }
+  
 
 
 
