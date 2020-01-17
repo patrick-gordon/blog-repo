@@ -15,13 +15,13 @@ router.get('/', Protected, (req, res) => {
     });
 });
 
-router.post('/:id', Protected, (req, res) => {
+router.post('/', Protected, (req, res) => {
   console.log(req.params);
     const postData = req.body;
-    const id = req.params 
+    const { sub, username } = req.decodedToken;
     
 
-    User.findBy(id);
+    User.findBy({username});
     Post.add(postData)
     .then(newPost => {
         res.status(201).json(newPost)

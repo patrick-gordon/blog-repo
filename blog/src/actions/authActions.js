@@ -48,6 +48,7 @@ export const register = ({ username, password }) => dispatch => {
         type: REGISTER_SUCCESS,
         payload: res.data
     }))
+    
     .catch(err => {
         dispatch(
             returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
