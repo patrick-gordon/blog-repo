@@ -49,6 +49,7 @@ class Signup extends Component {
 
         //new user object
         const newUser = {
+            
             username,
             password
         };
@@ -56,8 +57,6 @@ class Signup extends Component {
         //Attempt to register
         this.props.register(newUser);
     };
-
-  
 
     render() {
         return (
@@ -84,6 +83,7 @@ class Signup extends Component {
                             placeholder="Password"
                             onChange={this.onChange}
                             />
+                       
                         <Button color='dark' style={{ width: '10rem'}} block className='mt-3'>
                             Submit
                         </Button>

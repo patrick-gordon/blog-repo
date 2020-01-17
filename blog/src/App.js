@@ -13,9 +13,9 @@ import AppNav from './components/AppNav';
 
 
 class App extends Component {
- componentDidMount(){
-   store.dispatch(loadUser());
- }
+//  componentDidMount(){
+//    store.dispatch(loadUser());
+//  }
 
   render(){
   return (

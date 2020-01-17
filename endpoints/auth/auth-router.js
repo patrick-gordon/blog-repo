@@ -32,7 +32,7 @@ router.post('/login',  (req,res) => {
 
 //Create User
 router.post('/register', (req, res) => {
-    let user = req.body;
+    const user = req.body;
   
     const hash = bcrypt.hashSync(user.password, 10);  //number as second param is how long it takes to hash password
     user.password = hash;
