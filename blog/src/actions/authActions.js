@@ -36,7 +36,7 @@ export const loadUser = () => (dispatch, getState) => {
 export const register = ({ username, password }) => dispatch => {
     
     //request body
-    const user = JSON.stringify({ user: username, password });
+    const user = {user:{username, password}}
     console.log('user', user)
     axios
     .post('http://localhost:4444/api/auth/register', user)

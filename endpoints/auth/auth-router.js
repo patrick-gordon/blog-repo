@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser')
 
 const router = express.Router();
-const jsonParser = bodyParser.json();
+router.use(bodyParser.urlencoded({extended: true}))
 
 router.post('/login',  (req,res) => {
     const { username, password } = req.body;
@@ -33,7 +33,7 @@ router.post('/login',  (req,res) => {
 });
 
 //Create User
-router.post('/register', jsonParser, (req, res) => {
+router.post('/register',  (req, res) => {
  
     const user = req.body.user
     console.log('user', user)
