@@ -34,11 +34,12 @@ export const loadUser = () => (dispatch, getState) => {
 
 //register User
 export const register = ({ username, password }) => dispatch => {
-
+    
     //request body
-    const body = JSON.stringify({ username, password });
+    const user = JSON.stringify({ user: username, password });
+    console.log('user', user)
     axios
-    .post('http://localhost:4444/api/auth/register', body)
+    .post('http://localhost:4444/api/auth/register', user)
     .then(res => dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data

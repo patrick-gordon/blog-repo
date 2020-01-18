@@ -4,8 +4,10 @@ const User = require('../users/user-model')
 const bcrypt = require('bcryptjs');
 const Protected = require('./restricted-middleware')
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser')
 
 const router = express.Router();
+const jsonParser = bodyParser.json();
 
 router.post('/login',  (req,res) => {
     const { username, password } = req.body;
@@ -31,8 +33,11 @@ router.post('/login',  (req,res) => {
 });
 
 //Create User
-router.post('/register', (req, res) => {
-    const user = req.body;
+router.post('/register', jsonParser, (req, res) => {
+ 
+    const user = req.body.user
+    console.log('user', user)
+    
   
     const hash = bcrypt.hashSync(user.password, 10);  //number as second param is how long it takes to hash password
     user.password = hash;

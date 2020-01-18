@@ -93,7 +93,7 @@ import PropTypes from 'prop-types'
                             <Label for='post'>post</Label>
                                 <Input 
                                     type='textarea'
-                                    name ='body'
+                                    name ='contents'
                                     body='body' //match state
                                     // id='item'
                                     placeholder='Add Post'

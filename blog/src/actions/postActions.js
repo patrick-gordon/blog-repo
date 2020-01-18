@@ -6,7 +6,7 @@ import {tokenConfig} from './authActions'
 export const getPosts = () => (dispatch, getState) => {
   dispatch(setPostsLoading());
   axios
-    .get('/api/posts', tokenConfig(getState))
+    .get('http://localhost:4444/api/posts', tokenConfig(getState))
     .then(res =>
          dispatch({
         type: GET_POSTS,
@@ -30,7 +30,7 @@ export const deletePost = (id) => dispatch => {
 
 export const addPost = post  => dispatch => {
    axios
-    .post('/api/posts', post)
+    .post('http://localhost:4444/api/posts', post)
     .then(res => 
         dispatch({
             type: ADD_POST,
